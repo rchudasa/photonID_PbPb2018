@@ -1,4 +1,5 @@
 addVaribles.ipynb
 *.root
+makeInputTrees/mvaDataMaker.exe
 makeInputTrees/workarea
 makeInputTrees/workarea/*.root
