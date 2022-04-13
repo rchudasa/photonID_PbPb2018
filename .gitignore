@@ -1,7 +1,13 @@
 addVaribles.ipynb
 *.root
-makeInputTrees/condor
-makeInputTrees/condor/*
+makeInputTrees/condor/rchudasa.cc
+makeInputTrees/condor/error
+makeInputTrees/condor/error/*
+makeInputTrees/condor/log
+makeInputTrees/condor/log/*
+makeInputTrees/condor/output
+makeInputTrees/condor/output/*
+makeInputTrees/condor/mvaDataMaker.exe
 makeInputTrees/mvaDataMaker.exe
 makeInputTrees/workarea
 makeInputTrees/workarea/*.root

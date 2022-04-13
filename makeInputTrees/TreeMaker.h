@@ -92,13 +92,13 @@ class TreeMaker
 
     // Helper funtions
     void readParameters(string fname);
-    void setupInputTree();
+    void setupInputTree(string inFile);
     void setupOutputSCTree();
     void AllocateMemory();
     
     void SaveFile();
-    void setupOutPuts(bool makeTreeCopy=false);
-    void SetupAnalysis(bool makeTreeCopy=false);
+    void setupOutPuts(bool makeTreeCopy=false, string outFile="output.root");
+    void SetupAnalysis(bool makeTreeCopy=false, string inFile="input.root", string outFile="output.root");
     
 
     void AddSCTree(TString SCTreeName="SCTreeStorage");
@@ -147,7 +147,8 @@ TreeMaker::TreeMaker()
 void TreeMaker::Init(string cfgFileName)
 {
     treeName="mergedTree";
-    prefix="workarea/";
+    //prefix="workarea/";
+    prefix="";
     ofileName="output.root";
     InFileList.clear();
     ofileName="output.root";
@@ -168,7 +169,7 @@ void TreeMaker::Init(string cfgFileName)
     initDone=true;
 }
 
-void TreeMaker::SetupAnalysis(bool makeTreeCopy)
+void TreeMaker::SetupAnalysis(bool makeTreeCopy, string inFile, string outFile)
 {
 
     if( not initDone) 
@@ -177,11 +178,11 @@ void TreeMaker::SetupAnalysis(bool makeTreeCopy)
         return;
     }
     
-    setupInputTree();
-    setupOutPuts(makeTreeCopy);
+    setupInputTree(inFile);
+    setupOutPuts(makeTreeCopy, outFile);
 }
 
-void TreeMaker::setupInputTree()
+void TreeMaker::setupInputTree(string inFile)
 {   
     if( not initDone) 
     {
@@ -191,11 +192,12 @@ void TreeMaker::setupInputTree()
 
     treeChain = new TChain(treeName.c_str());
     auto rslt=0;
-    for(auto i=0;i<InFileList.size();i++)
+    rslt=treeChain->AddFile(inFile.c_str());
+    /*for(auto i=0;i<InFileList.size();i++)
     {
         rslt=treeChain->AddFile(InFileList[i].c_str(),-1);
         if(rslt!=1) exit(112);
-    }
+    }*/
     
     nentries = treeChain->GetEntries();
     if( maxEvents < 0) maxEvents = nentries;
@@ -207,9 +209,10 @@ void TreeMaker::setupInputTree()
 
 }
 
-void TreeMaker::setupOutPuts(bool makeTreeCopy)
+void TreeMaker::setupOutPuts(bool makeTreeCopy, string outFile)
 {
-   outputFile = new  TFile((prefix+ofileName).c_str(),"recreate");    
+   //outputFile = new  TFile((prefix+ofileName).c_str(),"recreate");    
+   outputFile = new  TFile(outFile.c_str(),"recreate");    
     
    
    if(makeTreeCopy)
