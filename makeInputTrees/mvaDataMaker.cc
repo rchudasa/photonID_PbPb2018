@@ -1,3 +1,7 @@
+// This code is based on Aravid Sugunan's code 
+// located on https://github.com/ats2008/BsMMGAnalysis/tree/photnIDdev/PhotonID/test
+// Updated by Ruchi Chudasama on 13 April 2022
+//
 #include "TROOT.h"
 #include "TFile.h"
 #include "TH1.h"
@@ -11,14 +15,6 @@
 #include "iostream"
 using namespace std;
 
-
-
-/*
- *          USAGE
- *
- * root -b -q 'bmmX_distributionStudy.cc("YOURCONFIG.CFG")'
- *
- * */
 
 #include "TreeMaker.h" 
 

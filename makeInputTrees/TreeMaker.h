@@ -1,3 +1,8 @@
+// This code is based on Aravid Sugunan's code 
+// located on https://github.com/ats2008/BsMMGAnalysis/tree/photnIDdev/PhotonID/test
+//  Updated by Ruchi Chudasama on 13 April 2022
+// 
+
 #include "MVANtuple.h"
 #include "Util.h"
 #include "chrono"
