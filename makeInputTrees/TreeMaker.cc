@@ -385,9 +385,8 @@ void TreeMaker::genParticleSCMaker()
        if (ientry_evt < 0) break;
        nb = ntupleRawTree.fChain->GetEntry(jentry);   nbytes += nb;
        
-       std::cout << "Entry:" << jentry << "**********************Load tree "<< ntupleRawTree.nMC << std::endl;
 
-       if(jentry%reportEvery == 0 )
+       if(jentry%reportEvery == 1000 )
        {
              t_end = std::chrono::high_resolution_clock::now();
              std::cout<<"Processing Entry in event loop : "<<jentry<<" / "<<maxEvents<<"  [ "<<100.0*jentry/maxEvents<<"  % ]  "
@@ -406,7 +405,7 @@ void TreeMaker::genParticleSCMaker()
 
 	   if(abs(ntupleRawTree.mcEta->at(i)) < scAbsEtaMin ) continue;
            if(abs(ntupleRawTree.mcEta->at(i)) > scAbsEtaMax ) continue;
-            std::cout<<"\tpdg id : "<<(ntupleRawTree.mcPID)->at(i)<<" pt : "  \
+            //std::cout<<"\tpdg id : "<<(ntupleRawTree.mcPID)->at(i)<<" pt : "  \
                                     <<(ntupleRawTree.mcPt)->at(i)<<" eta : "<<(ntupleRawTree.mcEta)->at(i)<<" phi : "<<ntupleRawTree.mcPhi->at(i) \
                                     <<" status : "<<ntupleRawTree.mcStatus->at(i) \
                                     <<"\n";
@@ -431,16 +430,16 @@ void TreeMaker::genParticleSCMaker()
 
             if( scMatchIdx > -1)
             {
-                cout << jentry << "  matched " << endl;
+                //cout << jentry << "  matched " << endl;
                 fillSCVariablesToOutTree(scMatchIdx,"genMatchedSCTree");
- 	        cout<< "filled sc variables" << endl;
+ 	        //cout<< "filled sc variables" << endl;
                 nCands++;
                 foundmatch=true;
             }
        }
        if(foundmatch==true)     EventCountWithCand++;
        
- 	std::cout << jentry << "  just before photon loop " << std::endl;
+ 	//std::cout << jentry << "  just before photon loop " << std::endl;
        for( Int_t j =0 ;j< ntupleRawTree.nPho ;j++)
        {
 		               

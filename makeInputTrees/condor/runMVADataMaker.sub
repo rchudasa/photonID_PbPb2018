@@ -1,6 +1,6 @@
 Universe              = vanilla
 executable            = runMVADataMaker.sh
-arguments             = $(ProcId) 0 1 
+arguments             = $(ProcId) 1 1 
 GetEnv                = True
 requirements          = (OpSysAndVer =?= "CentOS7")
 output                = output/$(ClusterId).$(ProcId).out
@@ -8,4 +8,4 @@ error                 = error/$(ClusterId).$(ProcId).err
 log                   = log/$(ClusterId).log
 +JobFlavour           = "workday"
 # RequestCpus           = 8
-queue 10
+queue 100

@@ -13,18 +13,21 @@ uname -a
 inputPath=""
 outputPath=""
 sampleName=""
+configPath=""
 
 basePath="/eos/cms/store/group/phys_diffraction/lbyl_2018"
-suffix="_13April22"
+suffix="_18April22"
 
 if [ $2 -eq 0 ]
 then
   sampleName="flatPtPi0" # 10400 files
+  configPath="$dir/configs/Pi0Sample.cfg" # 10400 files
   inputPath="${basePath}/mc_flat_pt_pi0/flatPtPi0_5p02TeV_PbPb/flatPtPi0_HiForest_v2/220411_101918/0000/flatPtMC_HiForestAOD_${1}.root"
   outputPath="${basePath}/mc_flat_pt_pi0/mvaTrees${suffix}"
 elif [ $2 -eq 1 ]
 then
   sampleName="flatPtPhoton" # 10400 files
+  configPath="$dir/configs/SinglePhoton.cfg" # 10400 files
   inputPath="${basePath}/mc_flat_pt_photon/flatPtPhoton_5p02TeV_PbPb/flatPtPhoton_HiForest_v2/220411_102132/0000/flatPtMC_HiForestAOD_${1}.root"
   outputPath="${basePath}/mc_flat_pt_photon/mvaTrees${suffix}"
 fi
@@ -39,5 +42,6 @@ then
   echo "File already exists, skipping"
 else
   echo "Running"
-  ./mvaDataMaker.exe $dir/configs/Pi0Sample.cfg $inputPath $output $3
+  echo $configPath
+  ./mvaDataMaker.exe $configPath $inputPath $output $3
 fi 
