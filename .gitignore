@@ -1,3 +1,5 @@
+.ipynb_checkpoints/
+.ipynb_checkpoints/*
 addVaribles.ipynb
 *.root
 makeInputTrees/condor/rchudasa.cc
@@ -11,3 +13,7 @@ makeInputTrees/condor/mvaDataMaker.exe
 makeInputTrees/mvaDataMaker.exe
 makeInputTrees/workarea
 makeInputTrees/workarea/*.root
+trainMVA/*.root
+trainMVA/.ipynb_checkpoints/
+trainMVA/.ipynb_checkpoints/*
+
