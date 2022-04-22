@@ -58,13 +58,13 @@ int photonID_bdt_MLP_classification( TString myMethodList = "" )
   Use["FDA_MCMT"]        = 0;
   
   // Neural Networks (all are feed-forward Multilayer Perceptrons)
-  Use["MLP"]             = 1; // Recommended ANN
+  Use["MLP"]             = 0; // Recommended ANN
   Use["MLPBFGS"]         = 0; // Recommended ANN with optional training method
   Use["MLPBNN"]          = 0; // Recommended ANN with BFGS training method and bayesian regulator
   Use["CFMlpANN"]        = 0; // Depreciated ANN from ALEPH
   Use["TMlpANN"]         = 0; // ROOT's own ANN
   Use["DNN_GPU"]         = 0; // CUDA-accelerated DNN training.
-  Use["DNN_CPU"]         = 1; // Multi-core accelerated DNN.
+  Use["DNN_CPU"]         = 0; // Multi-core accelerated DNN.
   
   // Support Vector Machine
   Use["SVM"]             = 0;
@@ -124,7 +124,7 @@ int photonID_bdt_MLP_classification( TString myMethodList = "" )
  // TTree *background2   = (TTree*)input2->Get("output_tree");
     
   // Create a ROOT output file where TMVA will store ntuples, histograms, etc.
-  TString outfileName( "Output_after_BDT_MLP_dnn_training.root" );
+  TString outfileName( "Output_after_BDT_training_v2.root" );
   TFile* outputFile = TFile::Open( outfileName, "RECREATE" );
   
 
@@ -132,7 +132,7 @@ int photonID_bdt_MLP_classification( TString myMethodList = "" )
   TMVA::Factory *factory = new TMVA::Factory( "TMVAClassification", outputFile,
 					      "ROC:!Silent:Color:DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification" );
   
-  TMVA::DataLoader *dataloader=new TMVA::DataLoader("dataset_bdt_mlp_dnn");
+  TMVA::DataLoader *dataloader=new TMVA::DataLoader("dataset_bdt_v2");
 
 
 dataloader->AddVariable("phoSCEtaWidth", "phoSCEtaWidth", "",'F');
@@ -140,15 +140,15 @@ dataloader->AddVariable("phoSCPhiWidth", "phoSCPhiWidth", "",'F');
 dataloader->AddVariable("phoHoverE", "phoHoverE", "",'F');
 dataloader->AddVariable("phoSigmaIEtaIEta", "phoSigmaIEtaIEta", "",'F');
 dataloader->AddVariable("phoR9", "phoR9", "",'F');
-/*dataloader->AddVariable("phoE1x5", "phoE1x5", "",'F');
-dataloader->AddVariable("phoE2x5", "phoE2x5", "",'F');
-dataloader->AddVariable("phoE3x3", "phoE3x3", "",'F');
+//dataloader->AddVariable("phoE1x5", "phoE1x5", "",'F');
+//dataloader->AddVariable("phoE2x5", "phoE2x5", "",'F');
+//dataloader->AddVariable("phoE3x3", "phoE3x3", "",'F');
 dataloader->AddVariable("phoE5x5", "phoE5x5", "",'F');
-dataloader->AddVariable("phoMaxEnergyXtal", "phoMaxEnergyXtal", "",'F');
-dataloader->AddVariable("phoHadTowerOverEm1", "phoHadTowerOverEm1", "",'F');
-dataloader->AddVariable("phoHadTowerOverEm2", "phoHadTowerOverEm2", "",'F');
-dataloader->AddVariable("phoHoverE1", "phoHoverE1", "",'F');
-dataloader->AddVariable("phoHoverE2", "phoHoverE2", "",'F');
+//dataloader->AddVariable("phoMaxEnergyXtal", "phoMaxEnergyXtal", "",'F');
+//dataloader->AddVariable("phoHadTowerOverEm1", "phoHadTowerOverEm1", "",'F');
+//dataloader->AddVariable("phoHadTowerOverEm2", "phoHadTowerOverEm2", "",'F');
+//dataloader->AddVariable("phoHoverE1", "phoHoverE1", "",'F');
+//dataloader->AddVariable("phoHoverE2", "phoHoverE2", "",'F');
 dataloader->AddVariable("phoSigmaIEtaIPhi", "phoSigmaIEtaIPhi", "",'F');
 dataloader->AddVariable("phoSigmaIPhiIPhi", "phoSigmaIPhiIPhi", "",'F');
 dataloader->AddVariable("phoE2nd", "phoE2nd", "",'F');
@@ -156,17 +156,15 @@ dataloader->AddVariable("phoETop", "phoETop", "",'F');
 dataloader->AddVariable("phoEBottom", "phoEBottom", "",'F');
 dataloader->AddVariable("phoELeft", "phoELeft", "",'F');
 dataloader->AddVariable("phoERight", "phoERight", "",'F');
-dataloader->AddVariable("phoE1x3", "phoE1x3", "",'F');
-dataloader->AddVariable("phoE2x2", "phoE2x2", "",'F');
-dataloader->AddVariable("phoE2x5Max", "phoE2x5Max", "",'F');
-dataloader->AddVariable("phoE2x5Top", "phoE2x5Top", "",'F');
-dataloader->AddVariable("phoE2x5Bottom", "phoE2x5Bottom", "",'F');
-dataloader->AddVariable("phoE2x5Left", "phoE2x5Left", "",'F');
-dataloader->AddVariable("phoE2x5Right", "phoE2x5Right", "",'F');
-
-
+//dataloader->AddVariable("phoE1x3", "phoE1x3", "",'F');
+//dataloader->AddVariable("phoE2x2", "phoE2x2", "",'F');
+//dataloader->AddVariable("phoE2x5Max", "phoE2x5Max", "",'F');
+//dataloader->AddVariable("phoE2x5Top", "phoE2x5Top", "",'F');
+//dataloader->AddVariable("phoE2x5Bottom", "phoE2x5Bottom", "",'F');
+//dataloader->AddVariable("phoE2x5Left", "phoE2x5Left", "",'F');
+//dataloader->AddVariable("phoE2x5Right", "phoE2x5Right", "",'F');
 dataloader->AddVariable("pho_seedTime", "pho_seedTime", "",'F');
-*/
+
  
   
   

@@ -16,4 +16,5 @@ makeInputTrees/workarea/*.root
 trainMVA/*.root
 trainMVA/.ipynb_checkpoints/
 trainMVA/.ipynb_checkpoints/*
-
+trainMVA/dataset_bdt_v2/
+trainMVA/variableRank_v2.txt
