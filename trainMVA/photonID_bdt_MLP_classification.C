@@ -111,8 +111,8 @@ int photonID_bdt_MLP_classification( TString myMethodList = "" )
   TFile *input1(0);
   TFile *input2(0);
   
-  TString fsignal = "flatPtPhoton_forDNN.root";
-  TString fname1  = "flatPtPi0_forDNN.root";
+  TString fsignal = "mergedMVAPhotonTree.root";
+  TString fname1  = "mergedMVAPi0Tree.root";
   //TString fname2  = "flatPtElectron_forDNN.root";
   
   signal = TFile::Open( fsignal );
@@ -120,7 +120,7 @@ int photonID_bdt_MLP_classification( TString myMethodList = "" )
   //input2 = TFile::Open( fname2 );
 
   TTree *signalTree    = (TTree*)signal->Get("genMatchedSCTree");
-  TTree *background1   = (TTree*)input1->Get("output_tree");
+  TTree *background1   = (TTree*)input1->Get("mergedPi0_SCTree");
  // TTree *background2   = (TTree*)input2->Get("output_tree");
     
   // Create a ROOT output file where TMVA will store ntuples, histograms, etc.
@@ -135,26 +135,39 @@ int photonID_bdt_MLP_classification( TString myMethodList = "" )
   TMVA::DataLoader *dataloader=new TMVA::DataLoader("dataset_bdt_mlp_dnn");
 
 
-  dataloader->AddVariable("sigmaIetaIeta", "sigmaIetaIeta", "", 'F');
-  dataloader->AddVariable("sigmaIetaIphi", "sigmaIetaIphi", "", 'F');
+dataloader->AddVariable("phoSCEtaWidth", "phoSCEtaWidth", "",'F');
+dataloader->AddVariable("phoSCPhiWidth", "phoSCPhiWidth", "",'F');
+dataloader->AddVariable("phoHoverE", "phoHoverE", "",'F');
+dataloader->AddVariable("phoSigmaIEtaIEta", "phoSigmaIEtaIEta", "",'F');
+dataloader->AddVariable("phoR9", "phoR9", "",'F');
+/*dataloader->AddVariable("phoE1x5", "phoE1x5", "",'F');
+dataloader->AddVariable("phoE2x5", "phoE2x5", "",'F');
+dataloader->AddVariable("phoE3x3", "phoE3x3", "",'F');
+dataloader->AddVariable("phoE5x5", "phoE5x5", "",'F');
+dataloader->AddVariable("phoMaxEnergyXtal", "phoMaxEnergyXtal", "",'F');
+dataloader->AddVariable("phoHadTowerOverEm1", "phoHadTowerOverEm1", "",'F');
+dataloader->AddVariable("phoHadTowerOverEm2", "phoHadTowerOverEm2", "",'F');
+dataloader->AddVariable("phoHoverE1", "phoHoverE1", "",'F');
+dataloader->AddVariable("phoHoverE2", "phoHoverE2", "",'F');
+dataloader->AddVariable("phoSigmaIEtaIPhi", "phoSigmaIEtaIPhi", "",'F');
+dataloader->AddVariable("phoSigmaIPhiIPhi", "phoSigmaIPhiIPhi", "",'F');
+dataloader->AddVariable("phoE2nd", "phoE2nd", "",'F');
+dataloader->AddVariable("phoETop", "phoETop", "",'F');
+dataloader->AddVariable("phoEBottom", "phoEBottom", "",'F');
+dataloader->AddVariable("phoELeft", "phoELeft", "",'F');
+dataloader->AddVariable("phoERight", "phoERight", "",'F');
+dataloader->AddVariable("phoE1x3", "phoE1x3", "",'F');
+dataloader->AddVariable("phoE2x2", "phoE2x2", "",'F');
+dataloader->AddVariable("phoE2x5Max", "phoE2x5Max", "",'F');
+dataloader->AddVariable("phoE2x5Top", "phoE2x5Top", "",'F');
+dataloader->AddVariable("phoE2x5Bottom", "phoE2x5Bottom", "",'F');
+dataloader->AddVariable("phoE2x5Left", "phoE2x5Left", "",'F');
+dataloader->AddVariable("phoE2x5Right", "phoE2x5Right", "",'F');
 
-  
-  dataloader->AddVariable("phoSCEtaWidth",  "phoSCEtaWidth", "", 'F');
-  dataloader->AddVariable("phoSCEPhiWidth", "phoSCPhiWidth", "", 'F');
-  dataloader->AddVariable("phoHoverE",      "phoHoverE", "", 'F');
 
-
-
-  dataloader->AddVariable("PFNeuIso", "PFNeuIso", "", 'F');
+dataloader->AddVariable("pho_seedTime", "pho_seedTime", "",'F');
+*/
  
-  dataloader->AddVariable("PFChIso", "PFChIso", "", 'F'); 
-  dataloader->AddVariable("full5x5_e5x5", "full5x5_e5x5", "", 'F');
-  dataloader->AddVariable("full5x5_r9", "full5x5_r9", "", 'F');
-  dataloader->AddVariable("e2x5_MaxRatio", "e2x5_MaxRatio", "", 'F');
-
-
-  
-
   
   
   // You can add so-called "Spectator variables", which are not used in the MVA training,
